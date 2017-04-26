@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Web Socket Test mit ASP.NET Core Web API</title>
+</head>
+
+<body>
+    <input type="text" id="message" />
+    <button id="send-button">Senden</button>
+    <hr />
+    <pre id="status"></pre>
+
+    <script>
+        let websocket = new WebSocket(`ws://${location.host}/ws`);
+        let $status = document.getElementById("status");
+        websocket.onopen = () => { $status.textContent = 'connected'; }
+        websocket.onmessage = ev => { $status.textContent = ev.data; }
+        websocket.onerror = ev => { $status.textContent = ev.message; }
+        websocket.onclose = ev => { $status.textContent = 'disconnected'; }
+
+        document.getElementById('send-button').addEventListener('click', () => {
+            if (websocket.readyState == WebSocket.OPEN) {
+                websocket.send(document.getElementById('message').value)
+            }
+            else {
+                $status.textContent = 'Connection is closed';
+            }
+        }, false);
+    </script>
+</body>
+
+</html>
