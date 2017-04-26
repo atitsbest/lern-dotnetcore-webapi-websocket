@@ -26,4 +26,8 @@ Um den ASP.NET Core WebAPI Server zu starten: `dotnet run`
 
 # WebSockets
 
-kommt noch...
+In Stichworten:
+ * Microsoft.AspNetCore.WebSockets.Server
+ * Handlig auf dem Server in der Middleware
+ * Connections merken in einer Concurrent Collection (hier: ConcurrentDictionary mit IPrincipal als Key)
+ 
